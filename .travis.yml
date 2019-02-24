@@ -1,33 +1,41 @@
 language: java
 jdk: oraclejdk8
+#
+#stages:
+#  - aloha
+#  - inoa
+#  - punaewele
+#  - pukapuka
+#
+#
+#jobs:
+#  include:
+#    - stage: aloha
+#      script:
+#        - cd aloha-service
+#        - ./mvnw clean install -B
+#        - cd ..
+#    - stage: inoa
+#        script:
+#          - cd inoa-service
+#          - ./mvnw clean install -B
+#          - cd ..
+#    - stage: punaewele
+#        script:
+#          - cd punaewele-service
+#          - ./mvnw clean install -B
+#          - cd ..
+#    - stage: pukapuka
+#        script:
+#          - cd pukapuka-service
+#          - ./mvnw clean install -B
+#          - cd ..
 
-stages:
-  - aloha
-  - inoa
-  - punaewele
-  - pukapuka
-
-
-jobs:
+matrix:
   include:
-    - stage: aloha
-      script:
-        - cd aloha-service
-        - ./mvnw clean install -B
-        - cd ..
-    - stage: inoa
-        script:
-          - cd inoa-service
-          - ./mvnw clean install -B
-          - cd ..
-    - stage: punaewele
-        script:
-          - cd punaewele-service
-          - ./mvnw clean install -B
-          - cd ..
-    - stage: pukapuka
-        script:
-          - cd pukapuka-service
-          - ./mvnw clean install -B
-          - cd ..
+    - name: "aloha"
 
+script:
+  - cd aloha-service
+  - ./mvnw clean install -B
+  - cd ..
