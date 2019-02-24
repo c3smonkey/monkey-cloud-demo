@@ -18,6 +18,7 @@
         <java.version>1.8</java.version>
         <kotlin.version>1.3.21</kotlin.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+        <spring-cloud-contract.version>2.1.0.RELEASE</spring-cloud-contract.version>
     </properties>
 
     <dependencies>
@@ -180,6 +181,17 @@
                 <artifactId>git-commit-id-plugin</artifactId>
             </plugin>
 
+            <!-- Contracts -->
+            <plugin>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-contract-maven-plugin</artifactId>
+                <version>${spring-cloud-contract.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <packageWithBaseClasses>ch.c3smonkey.aloha</packageWithBaseClasses>
+                </configuration>
+            </plugin>
+
             <!-- Kotlin -->
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -200,6 +212,85 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
+
+
+            <!-- <plugin>
+              <groupId>org.springframework.cloud</groupId>
+              <artifactId>spring-cloud-contract-maven-plugin</artifactId>
+              <version>${spring-cloud-contract.version}</version>
+              <extensions>true</extensions>
+              &lt;!&ndash; Executions &ndash;&gt;
+              &lt;!&ndash;<executions>
+                  <execution>
+                      <goals>
+                          <goal>convert</goal>
+                          <goal>generateStubs</goal>
+                          <goal>generateTests</goal>
+                      </goals>
+                  </execution>
+              </executions>&ndash;&gt;
+              &lt;!&ndash; Configuration &ndash;&gt;
+              <configuration>
+                  <packageWithBaseClasses>ch.c3smonkey.aloha.base</packageWithBaseClasses>
+              </configuration>
+          </plugin>-->
+
+
+
+            <!-- Kotlin -->
+           <!-- <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                &lt;!&ndash; Execustion &ndash;&gt;
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <sourceDir>src/main/java</sourceDir>
+                                <sourceDir>src/main/kotlin</sourceDir>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <source>src/test/java</source>
+                                <source>src/test/kotlin</source>
+                                <source>target/generated-test-sources/contracts</source>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                </executions>
+                &lt;!&ndash; Configuration &ndash;&gt;
+                <configuration>
+                    <args>
+                        <arg>-Xjsr305=strict</arg>
+                    </args>
+                    <compilerPlugins>
+                        <plugin>spring</plugin>
+                    </compilerPlugins>
+                    <jvmTarget>${java.version}</jvmTarget>
+                </configuration>
+                &lt;!&ndash; Dependencies &ndash;&gt;
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>-->
         </plugins>
     </build>
 
