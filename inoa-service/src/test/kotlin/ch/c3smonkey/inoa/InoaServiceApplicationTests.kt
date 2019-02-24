@@ -1,4 +1,4 @@
-package ch.c3smonkey.aloha
+package ch.c3smonkey.inoa
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -14,23 +14,15 @@ import org.springframework.test.context.junit4.SpringRunner
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = ["spring.cloud.config.enabled:false", "eureka.client.enabled:false"])
 @TestPropertySource(locations = ["classpath:test.properties"])
-class AlohaServiceApplicationTests {
-
+class InoaServiceApplicationTests {
 
     @Autowired
     lateinit var testRestTemplate: TestRestTemplate
 
     @Test
     fun contextLoads() {
-        val deGreeting = this.testRestTemplate.getForObject("/de", String::class.java)
-        val enGreeting = this.testRestTemplate.getForObject("/en", String::class.java)
-        val esGreeting = this.testRestTemplate.getForObject("/es", String::class.java)
-        val defaultGreeting = this.testRestTemplate.getForObject("/", String::class.java)
-        assertEquals("Hallo", deGreeting)
-        assertEquals("Hello", enGreeting)
-        assertEquals("Hola", esGreeting)
-        assertEquals("Hello", defaultGreeting)
-
+        val inoa = testRestTemplate.getForObject("/", String::class.java)
+        assertEquals("John", inoa)
     }
 
 }

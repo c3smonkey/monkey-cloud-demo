@@ -1,4 +1,4 @@
-package ch.c3smonkey.pukapuka
+package ch.c3smonkey.inoa
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationProperties
@@ -22,6 +22,8 @@ fun main(args: Array<String>) {
 @ConfigurationProperties
 class InoaProperties {
     lateinit var inoa: String
+    lateinit var inoas : Map<String, String>
+
 }
 
 

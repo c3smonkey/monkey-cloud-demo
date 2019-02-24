@@ -192,9 +192,6 @@
                 <configuration>
                     <packageWithBaseClasses>ch.c3smonkey.aloha</packageWithBaseClasses>
                 </configuration>
-                <executions>
-
-                </executions>
             </plugin>
 
             <!-- Kotlin -->
@@ -280,8 +277,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
-
 </project>
