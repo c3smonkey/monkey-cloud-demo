@@ -2,7 +2,31 @@ language: java
 jdk: oraclejdk8
 
 install: true
-script:
-  - cd aloha-service
-  - ./mvnw clean install -B
+#script:
+#  - cd aloha-service
+#  - ./mvnw clean install -B
+
+
+jobs:
+  include:
+    - stage: build aloha
+      script:
+        - cd aloha-service
+        - ./mvnw clean install -B
+        - cd ..
+    - stage: build inoa
+        script:
+          - cd inoa-service
+          - ./mvnw clean install -B
+          - cd ..
+    - stage: build punaewele
+        script:
+          - cd punaewele-service
+          - ./mvnw clean install -B
+          - cd ..
+    - stage: build pukapuka
+        script:
+          - cd pukapuka-service
+          - ./mvnw clean install -B
+          - cd ..
 
