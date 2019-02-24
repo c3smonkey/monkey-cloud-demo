@@ -10,7 +10,9 @@ import org.springframework.test.context.TestPropertySource
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = ["spring.cloud.config.enabled:false","spring.cloud.discovery.enabled:false"])
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        properties = ["spring.cloud.config.enabled:false", "eureka.client.enabled:false"])
 @TestPropertySource(locations = ["classpath:test.properties"])
 class AlohaServiceApplicationTests {
 
