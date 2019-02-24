@@ -1,0 +1,17 @@
+security:
+  basic:
+    enable: false
+
+management:
+  security:
+    enabled: false
+
+spring:
+  profiles:
+    active: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://${pwd}/
+          search-paths: config-repo

@@ -1,4 +1,4 @@
-package ch.c3smonkey.inoa
+package ch.c3smonkey.pukapuka
 
 import org.junit.Test
 import org.junit.runner.RunWith

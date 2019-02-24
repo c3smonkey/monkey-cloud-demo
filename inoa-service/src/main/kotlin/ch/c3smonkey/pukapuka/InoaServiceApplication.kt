@@ -1,4 +1,4 @@
-package ch.c3smonkey.inoa
+package ch.c3smonkey.pukapuka
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationProperties
