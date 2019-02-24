@@ -34,8 +34,16 @@ jdk: oraclejdk8
 matrix:
   include:
     - name: "aloha"
-
-script:
-  - cd aloha-service
-  - ./mvnw clean install -B
-  - cd ..
+      script:
+        - cd aloha-service
+        - ./mvnw clean install -B
+        - cd ..
+    - name: "inoa"
+      script:
+        - cd inoa-service
+        - ./mvnw clean install -B
+        - cd ..
+#script:
+#  - cd aloha-service
+#  - ./mvnw clean install -B
+#  - cd ..
