@@ -1,4 +1,4 @@
-package contracts.name
+package contracts.inoa
 
 import org.springframework.cloud.contract.spec.Contract
 
