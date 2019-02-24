@@ -1,10 +1,8 @@
 language: java
 jdk: oraclejdk8
 
-jobs:
-  include:
-    - stage: build aloah
-      script:
-        - |
-        cd aloha-service
-        ./mvnw clean install -B
+install: true
+script:
+  - cd aloha-service
+  - ./mvnw clean install -B
+
