@@ -2,30 +2,30 @@ language: java
 jdk: oraclejdk8
 
 stages:
-  - build aloha
-  - build inoa
-  - build punaewele
-  - build pukapuka
+  - aloha
+  - inoa
+  - punaewele
+  - pukapuka
 
 
 jobs:
   include:
-    - stage: build aloha
+    - stage: aloha
       script:
         - cd aloha-service
         - ./mvnw clean install -B
         - cd ..
-    - stage: build inoa
+    - stage: inoa
         script:
           - cd inoa-service
           - ./mvnw clean install -B
           - cd ..
-    - stage: build punaewele
+    - stage: punaewele
         script:
           - cd punaewele-service
           - ./mvnw clean install -B
           - cd ..
-    - stage: build pukapuka
+    - stage: pukapuka
         script:
           - cd pukapuka-service
           - ./mvnw clean install -B
