@@ -1,4 +1,4 @@
-package ch.c3smonkey.aloha
+package ch.c3smonkey.inoa
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-class AlohaServiceApplicationTests {
+class InoaServiceApplicationTests {
 
     @Test
     fun contextLoads() {
