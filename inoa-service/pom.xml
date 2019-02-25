@@ -11,7 +11,7 @@
     <groupId>ch.c3smonkey</groupId>
     <artifactId>inoa-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>inoa-service</name>
+    <name>inoa-service (name)</name>
     <description>Monkey Clout Demo Application - Inoa-Service</description>
 
     <properties>

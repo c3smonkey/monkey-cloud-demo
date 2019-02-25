@@ -11,7 +11,7 @@
     <groupId>ch.c3smonkey</groupId>
     <artifactId>pukapuka-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>pukapuka-service</name>
+    <name>pukapuka-service (gateway)</name>
     <description>Monkey Clout Demo Application - PukaPuka-Service</description>
 
     <properties>

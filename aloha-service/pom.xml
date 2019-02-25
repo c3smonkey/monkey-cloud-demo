@@ -11,7 +11,7 @@
     <groupId>ch.c3smonkey</groupId>
     <artifactId>aloha-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>aloha-service</name>
+    <name>aloha-service (greeting)</name>
     <description>Monkey Clout Demo Application - Aloha-Service</description>
 
     <properties>

@@ -11,7 +11,7 @@
     <groupId>ch.c3smonkey</groupId>
     <artifactId>punaewele-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>punaewele-service</name>
+    <name>punaewele-service (web)</name>
     <description>Monkey Clout Demo Application - Punaewele-Service</description>
 
     <properties>
