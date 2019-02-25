@@ -1,3 +1,5 @@
+spring.application.name: pukapuka-service
+
 spring:
   cloud:
     gateway:
@@ -14,7 +16,6 @@ spring:
             - Path=/aloha/**
           filters:
             - RewritePath=/aloha(?<segment>.*), $\{segment}
-
 
 # Logging
 logging:
