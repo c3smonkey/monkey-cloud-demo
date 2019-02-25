@@ -4,18 +4,23 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: nameRoot
-          uri: lb://inoa
+        - id: inoa
+          uri: lb://inoa-service
           predicates:
             - Path=/inoa/**
           filters:
             - RewritePath=/inoa(?<segment>.*), $\{segment}
         - id: aloha
-          uri: lb://aloha
+          uri: lb://aloha-service
           predicates:
             - Path=/aloha/**
           filters:
             - RewritePath=/aloha(?<segment>.*), $\{segment}
+
+
+  sleuth:
+    sampler:
+      percentage: 0.0
 
 # Logging
 logging:
