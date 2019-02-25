@@ -13,5 +13,5 @@ spring:
     config:
       server:
         git:
-          uri: file://${pwd}/
+          uri: file://${pwd}
           search-paths: config-repo
