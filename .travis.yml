@@ -3,23 +3,18 @@ jdk: oraclejdk8
 
 matrix:
   include:
-    - name: "build aloha"
+    - name: "build aloha-service"
       script:
         - cd aloha-service
         - ./mvnw clean install -B
         - cd ..
-    - name: "build inoa"
+    - name: "build inoa-service"
       script:
         - cd inoa-service
         - ./mvnw clean install -B
         - cd ..
-    - name: "build punaewele"
+    - name: "build aggregate-service"
       script:
-        - cd punaewele-service
-        - ./mvnw clean install -B
-        - cd ..
-    - name: "build pukapuka"
-      script:
-        - cd pukapuka-service
+        - cd aggregate-service
         - ./mvnw clean install -B
         - cd ..

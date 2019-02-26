@@ -3,13 +3,13 @@ import org.springframework.cloud.contract.spec.Contract
 Contract.make {
     request {
         method 'GET'
-        url '/'
+        url '/de'
         headers {
         }
     }
     response {
         status 200
-        body("Hello")
+        body("Hallo")
         headers {
             contentType(textPlain())
         }
