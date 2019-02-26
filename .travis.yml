@@ -3,17 +3,17 @@ jdk: oraclejdk8
 
 job:
   include:
-    - name: "build aloha-service"
+    - stage: "build aloha-service"
       script:
         - cd aloha-service
         - ./mvnw clean install -B
         - cd ..
-    - name: "build inoa-service"
+    - stage: "build inoa-service"
       script:
         - cd inoa-service
         - ./mvnw clean install -B
         - cd ..
-    - name: "build aggregate-service"
+    - stage: "build aggregate-service"
       script:
         - cd aggregate-service
         - ./mvnw clean install -B
