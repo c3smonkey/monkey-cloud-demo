@@ -37,9 +37,8 @@ jobs:
       - run:
           name: Maven Build and Test
           command: |
-                     mvn install -B
-
-#      - run:
+                     mvn install -B -U dependency:go-offline
+ #      - run:
 #          name: Copy deployment artifacts to workspace
 #          command: |
 #            cp target/${CIRCLE_PROJECT_REPONAME}-*.jar ~/repo/monkey-mongo-service.jar
