@@ -7,6 +7,9 @@ docker-defaults: &docker-defaults
   docker:
     - image: docker:17.05.0-ce-git
 
+dependencies:
+  override:
+    - mvn --fail-never dependency:go-offline || true
 
 version: 2
 jobs:
@@ -37,7 +40,7 @@ jobs:
       - run:
           name: Maven Build and Test
           command: |
-                     mvn install -B -U dependency:go-offline
+                     mvn install -B
  #      - run:
 #          name: Copy deployment artifacts to workspace
 #          command: |
