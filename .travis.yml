@@ -1,19 +1,19 @@
 language: java
 jdk: oraclejdk8
 
-job:
+matrix:
   include:
-    - stage: "build aloha-service"
+    - name: "build aloha-service"
       script:
         - cd aloha-service
         - ./mvnw clean install -B
         - cd ..
-    - stage: "build inoa-service"
+    - name: "build inoa-service"
       script:
         - cd inoa-service
         - ./mvnw clean install -B
         - cd ..
-    - stage: "build aggregate-service"
+    - name: "build aggregate-service"
       script:
         - cd aggregate-service
         - ./mvnw clean install -B
