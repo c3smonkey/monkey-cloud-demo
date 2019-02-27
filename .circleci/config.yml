@@ -25,7 +25,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - restore_cache:
-          key: circleci-challenge-{{ checksum "pom.xml" }}
+          key: circleci-challenge-{{ checksum "aggregate-service/pom.xml" }}
       - run:
           name: Maven Dependency go-offline
           command: |
@@ -33,7 +33,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: circleci-challenge-{{ checksum "pom.xml" }}
+          key: circleci-challenge-{{ checksum "aggregate-service/pom.xml" }}
       - run:
           name: Maven Build and Test
           command: |
@@ -42,6 +42,7 @@ jobs:
                     cd ../inoa-service
                     mvn install -B
                     cd ../aggregate-service
+                    mvn install -B
 
 #      - run:
 #          name: Copy deployment artifacts to workspace
@@ -58,8 +59,8 @@ jobs:
 #          path: target/zerocode-test-reports
 #      - store_artifacts:
 #          path: target/zerocode-junit-interactive-fuzzy-search.html
-#      - persist_to_workspace:
-#          root: ~/repo
+      - persist_to_workspace:
+          root: ~/repo
 #          paths:
 #            - zerocode-test-reports
 #            - zerocode-junit-interactive-fuzzy-search.html
@@ -73,8 +74,7 @@ jobs:
       - checkout
       - run: |
           echo "not implemented" 
-          ls -la
- 
+
 
   docker-build-push:
     <<: *docker-defaults

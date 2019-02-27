@@ -1,4 +1,4 @@
-# Monkey Cloud Demo [![Build Status](https://travis-ci.org/c3smonkey/monkey-cloud-demo.svg?branch=master)](https://travis-ci.org/c3smonkey/monkey-cloud-demo)
+# Monkey Cloud Demo 
 
 This Kotlin Spring Cloud project is heavily inspired by the awesome [Ryan Baxter`s beginners-guide-to-spring-cloud](https://github.com/ryanjbaxter/beginners-guide-to-spring-cloud)
  
