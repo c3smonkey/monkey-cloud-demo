@@ -25,7 +25,7 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - restore_cache:
-          key: circleci-challenge-{{ checksum "aggregate-service/pom.xml" }}
+          key: circleci-challenge-{{ checksum "pom.xml" }}
       - run:
           name: Maven Dependency go-offline
           command: |
@@ -33,16 +33,11 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: circleci-challenge-{{ checksum "aggregate-service/pom.xml" }}
+          key: circleci-challenge-{{ checksum "pom.xml" }}
       - run:
           name: Maven Build and Test
           command: |
-                    cd aloha-service
-                    mvn install -B
-                    cd ../inoa-service
-                    mvn install -B
-                    cd ../aggregate-service
-                    mvn install -B
+                     mvn install -B
 
 #      - run:
 #          name: Copy deployment artifacts to workspace
