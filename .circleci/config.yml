@@ -1,147 +1,34 @@
-defaults: &defaults
-  working_directory: ~/repo
-  docker:
-    - image: 'circleci/openjdk:8-jdk-browsers'
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
 
-docker-defaults: &docker-defaults
-  docker:
-    - image: docker:17.05.0-ce-git
+    working_directory: ~/circleci-demo-java-spring # directory where steps will run
 
-dependencies:
-  override:
-    - mvn --fail-never dependency:go-offline || true
+    docker: # run the steps with Docker
+      - image: circleci/openjdk:8-jdk-browsers # ...with this image as the primary container; this is where all `steps` will run
 
-version: 2
-jobs:
-  checkout_code:
-    <<: *defaults
-    steps:
-      - checkout
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - .
+    steps: # a collection of executable commands
 
-  build-maven:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/repo
-      - restore_cache:
-          key: circleci-challenge-{{ checksum "pom.xml" }}
-      - run:
-          name: Maven Dependency go-offline
-          command: |
-                  mvn dependency:go-offline     
-      - save_cache:
+      - checkout # check out source code to working directory
+
+      - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+
+      - run: mvn dependency:go-offline # gets the project dependencies
+
+      - save_cache: # saves the project dependencies
           paths:
             - ~/.m2
-          key: circleci-challenge-{{ checksum "pom.xml" }}
-      - run:
-          name: Maven Build and Test
-          command: |
-                     mvn install -B
- #      - run:
-#          name: Copy deployment artifacts to workspace
-#          command: |
-#            cp target/${CIRCLE_PROJECT_REPONAME}-*.jar ~/repo/monkey-mongo-service.jar
-#            cp target/zerocode-*.csv ~/repo
-#            cp target/zerocode-*.html ~/repo
-#            cp -R target/zerocode-test-reports ~/repo
-#      - store_test_results:
-#          path: target/surefire-reports
-#      - store_artifacts:
-#          path: ~/repo/monkey-mongo-service.jar
-#      - store_artifacts:
-#          path: target/zerocode-test-reports
-#      - store_artifacts:
-#          path: target/zerocode-junit-interactive-fuzzy-search.html
-      - persist_to_workspace:
-          root: ~/repo
-#          paths:
-#            - zerocode-test-reports
-#            - zerocode-junit-interactive-fuzzy-search.html
-#            - monkey-cloud-service.jar
-            
-  release:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/repo
-      - checkout
-      - run: |
-          echo "not implemented" 
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
 
+      - run: mvn package # run the actual tests
 
-  docker-build-push:
-    <<: *docker-defaults
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/repo
-      - setup_remote_docker
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --no-cache \
-              py-pip=9.0.0-r1
-            pip install \
-              docker-compose==1.12.0 \
-              awscli==1.11.76
-      - restore_cache:
-          keys:
-            - v1-{{ .Branch }}
-          paths:
-            - /caches/app.tar
-      - run:
-          name: Load Docker image layer cache
-          command: |
-            set +o pipefail
-            docker load -i /caches/app.tar | true
-      - run:
-          name: Build application Docker image
-          command: |
-            docker build --cache-from=app -t app .
-      - run:
-          name: Save Docker image layer cache
-          command: |
-            mkdir -p /caches
-            docker save -o /caches/app.tar app
-      - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
-          paths:
-            - /caches/app.tar
-      - deploy:
-          name: Build and Push Docker Image
-          command: |
-            cp ~/repo/$CIRCLE_PROJECT_REPONAME.jar .
+      - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
+          # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: target/surefire-reports
 
-            TAG=${CIRCLE_SHA1}
-             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-               TAG=latest
-             else
-               TAG=${CIRCLE_BRANCH}
-             fi
-             docker build --build-arg JAR_FILE=$CIRCLE_PROJECT_REPONAME.jar -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$TAG .
-             docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-             docker push $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$TAG
-
-workflows:
-  version: 2
-  build-and-release:
-    jobs:
-      - checkout_code
-      - build-maven:
-          requires:
-            - checkout_code
-#      - docker-build-push:
-#          requires:
-#            - build-maven
-#      - release:
-#          requires:
-#            - build-maven
-#          filters:
-#            branches:
-#              only: master
-
-
+      - store_artifacts: # store the uberjar as an artifact
+          # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples  
