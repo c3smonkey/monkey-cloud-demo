@@ -10,4 +10,4 @@ jobs:
           name: maven build deploy inoa-service
           command: |
             cd inoa-service
-            mvn -s .circleci/settings.xml deploy
+            mvn -s ../.circleci/settings.xml deploy
