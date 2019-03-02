@@ -108,21 +108,22 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>ch.c3smonkey</groupId>
+            <artifactId>inoa-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <classifier>stubs</classifier>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>ch.c3smonkey</groupId>
             <artifactId>aloha-service</artifactId>
+             <version>0.0.1-SNAPSHOT</version>
             <classifier>stubs</classifier>
-            <version>[0.0.1,)</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>ch.c3smonkey</groupId>
-            <artifactId>inoa-service</artifactId>
-            <classifier>stubs</classifier>
-            <version>[0.0.1,)</version>
-            <scope>test</scope>
-        </dependency>
+
 
     </dependencies>
 
