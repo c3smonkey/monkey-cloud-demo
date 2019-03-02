@@ -17,7 +17,7 @@
 
     <modules>
         <module>aloha-service</module>
-        <!--<module>inoa-service</module>-->
+        <module>inoa-service</module>
         <!--<module>aggregate-service</module>-->
     </modules>
     <profiles>
