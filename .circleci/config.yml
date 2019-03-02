@@ -8,9 +8,9 @@ jobs:
       - checkout
       - run: mvn dependency:go-offline
       - run:
-          name: maven build -DskipTests=true
+          name: maven build
           command: |
-              mvn -s .circleci.settings.xml -DskipTests deploy
+              mvn -s .circleci.settings.xml -DskipTests=true deploy
 #            -Dinternal.nexus.username=$ARTIFACTORY_USER -Dinternal.nexus.password=$ARTIFACTORY_PASSWORD -DforkCount=0 build -DskipTests=true
 
 #      - run:
