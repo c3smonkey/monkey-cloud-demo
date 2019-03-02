@@ -1,3 +1,30 @@
+version: 2
+jobs:
+  upload-artifact:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: mvn dependency:go-offline
+      - run:
+          name: maven build
+          command: |
+            mvn -pl inoa-service clean install
+      - run:
+          name: Install jFrog CLI
+          command: curl -fL https://getcli.jfrog.io | sh
+      - run:
+          name: Push to Artifactory
+          command: |
+            ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
+            ./jfrog rt u inoa-service/target/inoa-service-0.0.1-SNAPSHOT-stubs.jar http://nexusvm.cloudapp.net/artifactory/libs-release-local --build-name=inoa-service --build-number=$CIRCLE_BUILD_NUM
+            ./jfrog rt bce inoa-service $CIRCLE_BUILD_NUM
+            ./jfrog rt bp inoa-service $CIRCLE_BUILD_NUM
+
+
+
+
 ## Java Maven CircleCI 2.0 configuration file
 ##
 ## Check https://circleci.com/docs/2.0/language-java/ for more details
@@ -48,27 +75,3 @@
 #      - run: mvn -pl aggregate-service integration-test
 
 
-
-version: 2
-jobs:
-  upload-artifact:
-    docker:
-      - image: circleci/openjdk:8-jdk
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run: mvn dependency:go-offline
-      - run:
-          name: maven build
-          command: |
-            mvn -pl inoa-service clean install
-      - run:
-          name: Install jFrog CLI
-          command: curl -fL https://getcli.jfrog.io | sh
-      - run:
-          name: Push to Artifactory
-          command: |
-            ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
-            ./jfrog rt u inoa-service/target/inoa-service-0.0.1-SNAPSHOT-stubs.jar http://nexusvm.cloudapp.net/artifactory/libs-release-local --build-name=inoa-service --build-number=$CIRCLE_BUILD_NUM
-            ./jfrog rt bce inoa-service $CIRCLE_BUILD_NUM
-            ./jfrog rt bp inoa-service $CIRCLE_BUILD_NUM
