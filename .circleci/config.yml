@@ -11,3 +11,8 @@ jobs:
           command: |
             cd inoa-service
             mvn -s ../.circleci/settings.xml deploy
+      - run:
+          name: maven build deploy aloha-service
+          command: |
+            cd aloha-service
+            mvn -s ../.circleci/settings.xml deploy
