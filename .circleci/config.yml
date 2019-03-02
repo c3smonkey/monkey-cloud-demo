@@ -7,25 +7,25 @@ jobs:
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
-      INOA-SERVICE: "inoa-service"
-      ALOHA-SERVICE: "aloha-service"
-      AGGREGATE-SERVICE: "aggregate-service"
+      INOA-SERVICE: inoa-service
+      ALOHA-SERVICE: aloha-service
+      AGGREGATE-SERVICE: aggregate-service
     steps:
       - checkout
       - run:
-          name: maven build deploy ${INOA-SERVICE}
+          name: maven build deploy $INOA-SERVICE
           command: |
-            cd ${INOA-SERVICE}
+            cd $INOA-SERVICE
             mvn -s ../.circleci/settings.xml deploy
       - run:
-          name: maven build deploy ${ALOHA-SERVICE}
+          name: maven build deploy $ALOHA-SERVICE
           command: |
-            cd ${ALOHA-SERVICE}
+            cd $ALOHA-SERVICE
             mvn -s ../.circleci/settings.xml deploy
       - run:
-          name: maven build deploy ${AGGREGATE-SERVICE}
+          name: maven build deploy $AGGREGATE-SERVICE
           command: |
-            cd ${AGGREGATE-SERVICE}
+            cd $AGGREGATE-SERVICE
             mvn -s ../.circleci/settings.xml -DforkCount=0 deploy
 
 
