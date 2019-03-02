@@ -16,3 +16,8 @@ jobs:
           command: |
             cd aloha-service
             mvn -s ../.circleci/settings.xml deploy
+      - run:
+          name: maven build deploy aggregate-service
+          command: |
+            cd aggregate-service
+            mvn -s ../.circleci/settings.xml deploy
