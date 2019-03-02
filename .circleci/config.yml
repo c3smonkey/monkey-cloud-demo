@@ -15,17 +15,18 @@ jobs:
       - run:
           name: maven build deploy ${INOA-SERVICE}
           command: |
-            cd ${INOA-SERVICE}
+            echo $INOA
+            cd inoa-service
             mvn -s ../.circleci/settings.xml deploy
       - run:
           name: maven build deploy $ALOHA-SERVICE
           command: |
-            cd $ALOHA-SERVICE
+            cd aloha-service
             mvn -s ../.circleci/settings.xml deploy
       - run:
           name: maven build deploy $AGGREGATE-SERVICE
           command: |
-            cd $AGGREGATE-SERVICE
+            cd aggregate-service
             mvn -s ../.circleci/settings.xml -DforkCount=0 deploy
 
 
