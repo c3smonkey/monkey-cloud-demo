@@ -1,9 +1,49 @@
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-    <servers>
-        <server>
-            <id>azure-nexus</id>
-            <username>${env.$ARTIFACTORY_USER}</username>
-            <password>${env.$ARTIFACTORY_PASSWORD}</password>
-        </server>
-    </servers>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                          https://maven.apache.org/xsd/settings-1.0.0.xsd">
+<localRepository/>
+<interactiveMode/>
+<usePluginRegistry/>
+<offline/>
+<pluginGroups/>
+
+<servers>
+    <!-- Azure Docker Registery -->
+    <server>
+        <username>${env.$ARTIFACTORY_USER}</username>
+        <password>${env.$ARTIFACTORY_PASSWORD}</password>
+        <id>azure-nexus</id>
+    </server>
+
+
+
+</servers>
+
+
+<mirrors/>
+<proxies/>
+<profiles>
+    <profile>
+        <id>azure-nexus</id>
+        <repositories>
+            <repository>
+                <id>azure-nexus</id>
+                <name>libs-release</name>
+                <url>http://nexusvm.cloudapp.net/artifactory/maven-public</url>
+                <releases>
+                    <enabled>true</enabled>
+                    <updatePolicy>always</updatePolicy>
+                </releases>
+                <snapshots>
+                    <enabled>true</enabled>
+                    <updatePolicy>always</updatePolicy>
+                </snapshots>
+            </repository>
+        </repositories>
+    </profile>
+</profiles>
+<activeProfiles>
+    <activeProfile>azure-nexus</activeProfile>
+</activeProfiles>
 </settings>
