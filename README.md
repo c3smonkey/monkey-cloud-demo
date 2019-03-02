@@ -1,4 +1,4 @@
-# Monkey Cloud Demo  
+# Monkey Cloud Demo     
 
 This Kotlin Spring Cloud project is heavily inspired by the awesome [Ryan Baxter`s beginners-guide-to-spring-cloud](https://github.com/ryanjbaxter/beginners-guide-to-spring-cloud)
  

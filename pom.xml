@@ -20,4 +20,32 @@
         <module>inoa-service</module>
         <module>aggregate-service</module>
     </modules>
+    <profiles>
+        <!-- release -->
+        <profile>
+            <id>azure-nexus</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <!-- Distribution -->
+            <distributionManagement>
+                <repository>
+                    <id>azure-nexus</id>
+                    <url>http://nexusvm.cloudapp.net/artifactory/libs-release-local</url>
+                </repository>
+                <snapshotRepository>
+                    <id>azure-nexus</id>
+                    <uniqueVersion>false</uniqueVersion>
+                    <url>http://nexusvm.cloudapp.net/artifactory/libs-snapshot-local</url>
+                </snapshotRepository>
+            </distributionManagement>
+            <repositories>
+                <repository>
+                    <id>azure-nexus</id>
+                    <url>http://nexusvm.cloudapp.net/artifactory/maven-public</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
 </project>
