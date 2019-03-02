@@ -8,21 +8,9 @@ jobs:
       - checkout
       - run: mvn dependency:go-offline
       - run:
-          name: maven build
+          name: maven build deploy
           command: |
-              mvn -s .circleci/settings.xml -DskipTests=true install deploy
-#            -Dinternal.nexus.username=$ARTIFACTORY_USER -Dinternal.nexus.password=$ARTIFACTORY_PASSWORD -DforkCount=0 build -DskipTests=true
-
-#      - run:
-#          name: Install jFrog CLI
-#          command: curl -fL https://getcli.jfrog.io | sh
-#      - run:
-#          name: Push to Artifactory
-#          command: |
-#            ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password $ARTIFACTORY_PASSWORD --interactive=false
-#            ./jfrog rt u inoa-service/target/inoa-service-0.0.1-SNAPSHOT-stubs.jar http://nexusvm.cloudapp.net/artifactory/libs-snapshot-local --build-name=inoa-service --build-number=$CIRCLE_BUILD_NUM
-#            ./jfrog rt bce inoa-service $CIRCLE_BUILD_NUM
-#            ./jfrog rt bp inoa-service $CIRCLE_BUILD_NUM
+              mvn -s .circleci/settings.xml install deploy
 
 
 
