@@ -10,7 +10,10 @@ jobs:
       - run:
           name: maven build
           command: |
-            mvn -B -U -Dinternal.nexus.username=$ARTIFACTORY_USER -Dinternal.nexus.password=$ARTIFACTORY_PASSWORD -DforkCount=0 -pl inoa-service clean install deploy
+            mvn -B -U -Dinternal.nexus.username=$ARTIFACTORY_USER -Dinternal.nexus.password=$ARTIFACTORY_PASSWORD -DforkCount=0 -pl inoa-service clean install
+            mvn -B -U -Dinternal.nexus.username=$ARTIFACTORY_USER -Dinternal.nexus.password=$ARTIFACTORY_PASSWORD -DforkCount=0 -pl aloah-service clean install
+            mvn -B -U -Dinternal.nexus.username=$ARTIFACTORY_USER -Dinternal.nexus.password=$ARTIFACTORY_PASSWORD -DforkCount=0 -pl aggregate-service clean install
+
 
 #      - run:
 #          name: Install jFrog CLI
