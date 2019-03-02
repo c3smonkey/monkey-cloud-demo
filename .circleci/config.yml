@@ -10,7 +10,7 @@ jobs:
       - run:
           name: maven build
           command: |
-              mvn -s .circleci.settings.xml -DskipTests=true deploy
+              mvn -s .circleci.settings.xml -DskipTests=true deploy -X
 #            -Dinternal.nexus.username=$ARTIFACTORY_USER -Dinternal.nexus.password=$ARTIFACTORY_PASSWORD -DforkCount=0 build -DskipTests=true
 
 #      - run:
