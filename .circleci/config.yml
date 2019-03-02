@@ -72,5 +72,3 @@ jobs:
             ./jfrog rt u inoa-service/target/inoa-service-0.0.1-SNAPSHOT-stubs.jar http://nexusvm.cloudapp.net/artifactory/libs-release-local --build-name=inoa-service --build-number=$CIRCLE_BUILD_NUM
             ./jfrog rt bce inoa-service $CIRCLE_BUILD_NUM
             ./jfrog rt bp inoa-service $CIRCLE_BUILD_NUM
-
- >
