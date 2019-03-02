@@ -1,12 +1,12 @@
 version: 2
 jobs:
-  upload-artifact:
+  build:
     docker:
       - image: circleci/openjdk:8-jdk
     working_directory: ~/repo
     steps:
       - checkout
-      - run: mvn dependency:go-offline
+#      - run: mvn dependency:go-offline
       - run:
           name: maven build
           command: |
