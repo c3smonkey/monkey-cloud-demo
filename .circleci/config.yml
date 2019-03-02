@@ -39,3 +39,5 @@ jobs:
 
       # run tests!
       - run: mvn -pl inoa-service deploy
+      - run: mvn -pl aloha-service deploy
+      - run: mvn -pl aggregate-service integration-test
