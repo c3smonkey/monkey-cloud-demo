@@ -6,14 +6,12 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-#      - run: mvn dependency:go-offline
+      - run: mvn dependency:go-offline
       - run:
-          name: maven build
+          name: maven build -DskipTests=true
           command: |
-            mvn -B -U -Dinternal.nexus.username=$ARTIFACTORY_USER -Dinternal.nexus.password=$ARTIFACTORY_PASSWORD -DforkCount=0 -pl inoa-service clean install
-            mvn -B -U -Dinternal.nexus.username=$ARTIFACTORY_USER -Dinternal.nexus.password=$ARTIFACTORY_PASSWORD -DforkCount=0 -pl aloah-service clean install
-            mvn -B -U -Dinternal.nexus.username=$ARTIFACTORY_USER -Dinternal.nexus.password=$ARTIFACTORY_PASSWORD -DforkCount=0 -pl aggregate-service clean install
-
+              mvn -s .circleci.settings.xml -DskipTests deploy
+#            -Dinternal.nexus.username=$ARTIFACTORY_USER -Dinternal.nexus.password=$ARTIFACTORY_PASSWORD -DforkCount=0 build -DskipTests=true
 
 #      - run:
 #          name: Install jFrog CLI
