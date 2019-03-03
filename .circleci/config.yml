@@ -13,9 +13,11 @@ commands:
         type: string
         default: "Hello World"
     steps:
-      - run: echo << parameters.to >>
-
-
+      - run:
+          name: maven build deploy
+          command: |
+            cd << parameters.to >>
+            mvn -s ../.circleci/settings.xml -DforkCount=0 deploy
 
 
 
@@ -41,26 +43,26 @@ jobs:
       - checkout
       - sayhello:
           to: "inoa-service"
-      - run:
-          name: maven build deploy
-          command: |
-            echo $INOA
-            cd inoa-service
-            mvn -s ../.circleci/settings.xml deploy
+#      - run:
+#          name: maven build deploy
+#          command: |
+#            echo $INOA
+#            cd inoa-service
+#            mvn -s ../.circleci/settings.xml deploy
       - sayhello:
           to: "aloha-service"
-      - run:
-          name: maven build deploy
-          command: |
-            cd aloha-service
-            mvn -s ../.circleci/settings.xml deploy
+#      - run:
+#          name: maven build deploy
+#          command: |
+#            cd aloha-service
+#            mvn -s ../.circleci/settings.xml deploy
       - sayhello:
           to: "aggregate-service"
-      - run:
-          name: maven build deploy
-          command: |
-            cd aggregate-service
-            mvn -s ../.circleci/settings.xml -DforkCount=0 deploy
+#      - run:
+#          name: maven build deploy
+#          command: |
+#            cd aggregate-service
+#            mvn -s ../.circleci/settings.xml -DforkCount=0 deploy
 
 
 workflows:
