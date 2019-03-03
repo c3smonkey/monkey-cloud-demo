@@ -6,6 +6,7 @@ checkout: &checkout
         root: ~/repo
         paths:
           - .
+
 # Default openJDK8
 defaults: &defaults
   working_directory: ~/repo
