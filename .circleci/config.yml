@@ -39,6 +39,7 @@ jobs:
   build-and-deploy:
     <<: *defaults
     steps:
+      - checkout
       - build-maven-module:
           to: "inoa-service"
       - build-maven-module:
