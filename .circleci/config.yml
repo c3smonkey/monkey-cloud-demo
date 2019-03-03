@@ -4,6 +4,15 @@ defaults: &defaults
     - image: 'circleci/openjdk:8-jdk-browsers'
 
 
+build-inoa: &build-inoa
+  steps:
+    - run:
+        name: maven build deploy
+        command: |
+          echo $INOA
+          cd inoa-service
+          mvn -s ../.circleci/settings.xml deploy
+
 version: 2
 jobs:
   checkout_code:
@@ -24,19 +33,21 @@ jobs:
 
     steps:
       - checkout
+      <<: *build-inoa
+        -
+#      - run:
+#          name: maven build deploy
+#          command: |
+#            echo $INOA
+#            cd inoa-service
+#            mvn -s ../.circleci/settings.xml deploy
       - run:
-          name: maven build deploy ${INOA-SERVICE}
-          command: |
-            echo $INOA
-            cd inoa-service
-            mvn -s ../.circleci/settings.xml deploy
-      - run:
-          name: maven build deploy $ALOHA-SERVICE
+          name: maven build deploy
           command: |
             cd aloha-service
             mvn -s ../.circleci/settings.xml deploy
       - run:
-          name: maven build deploy $AGGREGATE-SERVICE
+          name: maven build deploy
           command: |
             cd aggregate-service
             mvn -s ../.circleci/settings.xml -DforkCount=0 deploy
