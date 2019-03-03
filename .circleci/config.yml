@@ -1,5 +1,5 @@
 # Checkout
-checkout: &checkout
+checkout_and_cache: &checkout_and_cache
   steps:
     - checkout
     - persist_to_workspace:
@@ -36,10 +36,10 @@ version: 2.1
 jobs:
   checkout_code:
     <<: *defaults
-    <<: *checkout
+    <<: *checkout_and_cache
   build-and-deploy:
     <<: *defaults
-
+    # Steps
     steps:
       - checkout
       - build-maven-module:
