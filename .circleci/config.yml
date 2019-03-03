@@ -1,3 +1,13 @@
+# Checkout
+checkout: &checkout
+  steps:
+    - checkout
+    - persist_to_workspace:
+        root: ~/repo
+        paths:
+          - .
+
+# Default openJDK8
 defaults: &defaults
   working_directory: ~/repo
   docker:
@@ -6,7 +16,7 @@ defaults: &defaults
     # Customize the JVM maximum heap limit
     MAVEN_OPTS: -Xmx3200m
 
-
+# Build Command for Maven en modules
 commands:
   build-maven-module:
     description: "Build and Deploy Maven Project"
@@ -21,18 +31,12 @@ commands:
             cd << parameters.to >>
             mvn -s ../.circleci/settings.xml -DforkCount=0 deploy
 
-
+# Jobs
 version: 2.1
 jobs:
   checkout_code:
     <<: *defaults
-    steps:
-      - checkout
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - .
-
+    <<: *checkout
   build-and-deploy:
     <<: *defaults
 
@@ -47,6 +51,7 @@ jobs:
       - build-maven-module:
           to: "aggregate-service"
 
+# Workflow
 workflows:
   version: 2.1
   build-and-release:
