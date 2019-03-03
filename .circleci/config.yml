@@ -1,3 +1,13 @@
+checkout: &checkout
+  steps:
+    - checkout
+    - persist_to_workspace:
+        root: ~/repo
+        paths:
+          - .
+
+
+
 defaults: &defaults
   working_directory: ~/repo
   docker:
@@ -26,17 +36,10 @@ version: 2.1
 jobs:
   checkout_code:
     <<: *defaults
-    steps:
-      - checkout
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - .
+    <<: *checkout
 
   build-and-deploy:
     <<: *defaults
-
-
 
     steps:
       - checkout
