@@ -1,10 +1,23 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: 'circleci/openjdk:8-jdk-browsers'
 
 
-version: 2.1
+version: 2
 jobs:
-  build:
+  checkout_code:
     <<: *defaults
-    working_directory: ~/repo
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
+
+  build-maven:
+    <<: *defaults
+
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
@@ -29,20 +42,14 @@ jobs:
             mvn -s ../.circleci/settings.xml -DforkCount=0 deploy
 
 
-
-
 workflows:
   version: 2
-  build-and-deploy:
+  build-and-release:
     jobs:
-      - build
-
-
-
-defaults: &defaults
-  working_directory: ~/repo
-  docker:
-    - image: 'circleci/openjdk:8-jdk-browsers'
+      - checkout_code
+      - build-maven:
+          requires:
+            - checkout_code
 
 
 #
