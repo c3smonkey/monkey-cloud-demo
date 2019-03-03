@@ -30,7 +30,7 @@ jobs:
           paths:
             - .
 
-  build-maven:
+  build-and-deploy:
     <<: *defaults
 
     environment:
@@ -51,6 +51,6 @@ workflows:
   build-and-release:
     jobs:
       - checkout_code
-      - build-maven:
+      - build-and-deploy:
           requires:
             - checkout_code
