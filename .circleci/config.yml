@@ -39,8 +39,7 @@ jobs:
     <<: *checkout
   build-and-deploy:
     <<: *defaults
-
-
+    <<: *checkout
 
     steps:
       - checkout
@@ -56,7 +55,7 @@ workflows:
   version: 2.1
   build-and-release:
     jobs:
-      - checkout_code
+#      - checkout_code
       - build-and-deploy:
-          requires:
-            - checkout_code
+#          requires:
+#            - checkout_code
