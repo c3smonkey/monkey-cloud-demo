@@ -52,9 +52,7 @@ jobs:
 # Workflow
 workflows:
   version: 2.1
-  build-and-release:
+  build_test_deploy:
     jobs:
-#      - checkout_code
-      - build-and-deploy:
-#          requires:
-#            - checkout_code
+      - build-and-deploy
+
