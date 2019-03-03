@@ -4,16 +4,22 @@ defaults: &defaults
     - image: 'circleci/openjdk:8-jdk-browsers'
 
 
-build-inoa: &build-inoa
-  steps:
-    - run:
-        name: maven build deploy
-        command: |
-          echo $INOA
-          cd inoa-service
-          mvn -s ../.circleci/settings.xml deploy
 
-version: 2
+commands:
+  sayhello:
+    description: "A very simple command for demonstration purposes"
+    parameters:
+      to:
+        type: string
+        default: "Hello World"
+    steps:
+      - run: echo << parameters.to >>
+
+
+
+
+
+version: 2.1
 jobs:
   checkout_code:
     <<: *defaults
@@ -33,19 +39,23 @@ jobs:
 
     steps:
       - checkout
-      <<: *build-inoa
-        -
-#      - run:
-#          name: maven build deploy
-#          command: |
-#            echo $INOA
-#            cd inoa-service
-#            mvn -s ../.circleci/settings.xml deploy
+      - sayhello:
+          to: "inoa-service"
+      - run:
+          name: maven build deploy
+          command: |
+            echo $INOA
+            cd inoa-service
+            mvn -s ../.circleci/settings.xml deploy
+      - sayhello:
+          to: "aloha-service"
       - run:
           name: maven build deploy
           command: |
             cd aloha-service
             mvn -s ../.circleci/settings.xml deploy
+      - sayhello:
+          to: "aggregate-service"
       - run:
           name: maven build deploy
           command: |
@@ -54,7 +64,7 @@ jobs:
 
 
 workflows:
-  version: 2
+  version: 2.1
   build-and-release:
     jobs:
       - checkout_code
