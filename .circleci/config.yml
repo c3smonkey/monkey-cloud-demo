@@ -39,7 +39,6 @@ jobs:
     <<: *checkout
   build-and-deploy:
     <<: *defaults
-    <<: *checkout
 
     steps:
       - checkout
