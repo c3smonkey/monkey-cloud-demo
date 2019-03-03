@@ -5,7 +5,7 @@ defaults: &defaults
 
 
 commands:
-  buildMavenModule:
+  build-maven-module:
     description: "Build and Deploy Maven Project"
     parameters:
       to:
@@ -39,11 +39,11 @@ jobs:
 
     steps:
       - checkout
-      - buildMavenModule:
+      - build-maven-module:
           to: "inoa-service"
-      - buildMavenModule:
+      - build-maven-module:
           to: "aloha-service"
-      - buildMavenModule:
+      - build-maven-module:
           to: "aggregate-service"
 
 workflows:
