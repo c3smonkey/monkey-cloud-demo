@@ -1,11 +1,12 @@
 # Checkout
-checkout: &checkout
+checkout-and-persist: &checkout-and-persist
   steps:
     - checkout
     - persist_to_workspace:
         root: ~/repo
         paths:
           - .
+
 # Default openJDK8
 defaults: &defaults
   working_directory: ~/repo
@@ -36,10 +37,10 @@ jobs:
 
   build-and-deploy:
     <<: *defaults
-    <<: *checkout
+    <<: *checkout-and-persist
 
     steps:
-#      - checkout
+      - checkout
       - build-maven-module:
           to: "inoa-service"
       - build-maven-module:
