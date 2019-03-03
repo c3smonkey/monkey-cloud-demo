@@ -1,12 +1,11 @@
 # Checkout
-checkout-and-persist: &checkout-and-persist
+checkout: &checkout
   steps:
     - checkout
     - persist_to_workspace:
         root: ~/repo
         paths:
           - .
-
 # Default openJDK8
 defaults: &defaults
   working_directory: ~/repo
@@ -37,7 +36,7 @@ jobs:
 
   build-and-deploy:
     <<: *defaults
-    <<: *checkout-and-persist
+    <<: *checkout
 
     steps:
       - checkout
