@@ -33,13 +33,12 @@ commands:
 # Jobs
 version: 2.1
 jobs:
-  checkout_code:
-    <<: *defaults
-    <<: *checkout
+
   build-and-deploy:
     <<: *defaults
+    <<: *checkout
+
     steps:
-      - checkout
       - build-maven-module:
           to: "inoa-service"
       - build-maven-module:
@@ -52,7 +51,4 @@ workflows:
   version: 2.1
   build-and-release:
     jobs:
-      - checkout_code
       - build-and-deploy:
-          requires:
-            - checkout_code
