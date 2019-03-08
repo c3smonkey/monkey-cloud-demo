@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletRequest
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableConfigurationProperties(  AlohaProperties::class)
-class AlohaServiceApplication
+class FooServiceApplication
 
 fun main(args: Array<String>) {
-    runApplication<AlohaServiceApplication>(*args)
+    runApplication<FooServiceApplication>(*args)
 }
 
 @ConfigurationProperties
