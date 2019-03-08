@@ -73,11 +73,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <!-- Zuul -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-        </dependency>
         <!-- Sleuth-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -123,8 +118,6 @@
             <classifier>stubs</classifier>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
 
     <pluginRepositories>

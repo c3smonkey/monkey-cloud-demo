@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-//@EnableZuulProxy
 class FooBarServiceApplication
 
 fun main(args: Array<String>) {
