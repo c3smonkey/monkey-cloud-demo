@@ -11,3 +11,10 @@ Before you run the applications in this repository you should install the [Sprin
 spring cloud eureka configserver zipkin
 ```
     
+    
+## Config Server
+Check if the configuration are loaded.
+ 
+- [Foo-Service](http://localhost:8888/foo-service/default)
+- [Bar-Service](http://localhost:8888/bar-service/default)
+
