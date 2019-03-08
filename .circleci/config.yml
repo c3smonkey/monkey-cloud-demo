@@ -43,11 +43,11 @@ jobs:
     steps:
       - checkout
       - build-maven-module:
-          to: "inoa-service"
+          to: "foo-service"
       - build-maven-module:
-          to: "aloha-service"
+          to: "bar-service"
       - build-maven-module:
-          to: "aggregate-service"
+          to: "foobar-service"
 
 # Workflow
 workflows:

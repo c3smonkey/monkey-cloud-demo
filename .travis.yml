@@ -3,18 +3,18 @@ jdk: oraclejdk8
 
 matrix:
   include:
-    - name: "build aloha-service"
+    - name: "build foo-service"
       script:
-        - cd aloha-service
+        - cd foo-service
         - ./mvnw clean install -B
         - cd ..
-    - name: "build inoa-service"
+    - name: "build bar-service"
       script:
-        - cd inoa-service
+        - cd bar-service
         - ./mvnw clean install -B
         - cd ..
-    - name: "build aggregate-service"
+    - name: "build foobar-service"
       script:
-        - cd aggregate-service
+        - cd foobar-service
         - ./mvnw clean install -B
         - cd ..
