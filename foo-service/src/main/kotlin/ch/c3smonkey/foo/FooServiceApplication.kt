@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableConfigurationProperties(  AlohaProperties::class)
+@EnableConfigurationProperties(FooProperties::class)
 class FooServiceApplication
 
 fun main(args: Array<String>) {
@@ -22,18 +22,18 @@ fun main(args: Array<String>) {
 }
 
 @ConfigurationProperties
-class AlohaProperties {
+class FooProperties {
     lateinit var greeting: String
-    lateinit var greetings : Map<String, String>
+    lateinit var greetings: Map<String, String>
 }
 
 
 @RestController
-class AlohaController(val alohaProperties: AlohaProperties) {
+class FooController(val fooProperties: FooProperties) {
 
     @GetMapping(value = ["/"])
     fun index(request: HttpServletRequest): String {
-        val greeting = alohaProperties.greeting
+        val greeting = fooProperties.greeting
         LOG.info("Service [foo-service] say : $greeting")
         return greeting
     }
@@ -41,12 +41,12 @@ class AlohaController(val alohaProperties: AlohaProperties) {
     @GetMapping("/{languageCode}")
     fun getWithLanguageCode(@PathVariable languageCode: String): String {
         LOG.info("Language Code: $languageCode")
-        LOG.info("Greeting: " + alohaProperties.greetings.get(languageCode.toUpperCase()))
-        return alohaProperties.greetings.getOrDefault(languageCode.toUpperCase(), alohaProperties.greeting)
+        LOG.info("Greeting: " + fooProperties.greetings.get(languageCode.toUpperCase()))
+        return fooProperties.greetings.getOrDefault(languageCode.toUpperCase(), fooProperties.greeting)
     }
 
     companion object {
-        private val LOG = Logger.getLogger(AlohaController::class.java.name)
+        private val LOG = Logger.getLogger(FooController::class.java.name)
     }
 
 
