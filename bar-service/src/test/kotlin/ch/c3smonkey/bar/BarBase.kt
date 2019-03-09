@@ -3,7 +3,7 @@ package ch.c3smonkey.bar
 import io.restassured.module.mockmvc.RestAssuredMockMvc
 import org.junit.Before
 
-open class BarBase {
+class BarBase {
 
     @Before
     fun setup() {
