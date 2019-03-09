@@ -1,0 +1,44 @@
+= {project-name} API Documentation
+Marcel Widmer <marzelwidmer@gmail.com>
+
+:copyright: ©
+:dot: .
+:ellipsis: …
+:hatch: #
+:pilcrow: ¶
+:star: *
+:tilde: ~
+:ul: _
+:revnumber: {project-version}
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../../main/java]
+ifndef::testdir[:testdir: ../../test/java]
+
+
+[[overview]]
+= Overview
+
+[[overview-general]]
+== General
+
+[architecture]
+== Architecture
+include::architecture.adoc[]
+
+[[overview-http-verbs]]
+== HTTP verbs
+include::http-verbs.adoc[]
+
+[[overview-http-status-codes]]
+== HTTP status codes
+include::http-status-codes.adoc[]
+
+[[overview-pagination]]
+== Pagination
+include::pagination.adoc[]
+
+[[resources]]
+= API Resources
+== Foo
+include::resources-foo.adoc[]
+

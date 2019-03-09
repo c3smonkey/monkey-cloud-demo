@@ -18,7 +18,7 @@
         <java.version>1.8</java.version>
         <kotlin.version>1.3.21</kotlin.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
-        <spring-cloud-contract.version>2.1.0.RELEASE</spring-cloud-contract.version>
+        <spring-cloud-contract.version>2.1.1.RELEASE</spring-cloud-contract.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
     </properties>
 

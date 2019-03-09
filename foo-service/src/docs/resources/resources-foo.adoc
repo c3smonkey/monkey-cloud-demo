@@ -1,0 +1,3 @@
+[[resources-foo]]
+operation::FooTest_validate_shouldReturnDefault/[snippets='httpie-request,response-body']
+
