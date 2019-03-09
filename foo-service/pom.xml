@@ -232,18 +232,22 @@
                             <goal>process-asciidoc</goal>
                         </goals>
                         <configuration>
+                            <!-- directories -->
+                            <baseDir>${asciidoctor-maven-plugin.baseDir}</baseDir>
+                            <sourceDirectory>${asciidoctor-maven-plugin.sourceDirectory}</sourceDirectory>
+                            <outputDirectory>${asciidoctor-maven-plugin.outputDirectory}</outputDirectory>
+                            <!-- backend -->
                             <backend>html5</backend>
                             <doctype>book</doctype>
                             <sourceHighlighter>coderay</sourceHighlighter>
-                            <sourceDirectory>${asciidoctor-maven-plugin.sourceDirectory}</sourceDirectory>
-                            <outputDirectory>${asciidoctor-maven-plugin.outputDirectory}</outputDirectory>
-                            <baseDir>${asciidoctor-maven-plugin.baseDir}</baseDir>
                             <requires>
                                 <require>asciidoctor-diagram</require>
                             </requires>
+                            <!-- attributes -->
                             <attributes>
                                 <imagesdir>./images</imagesdir>
                                 <toc>left</toc>
+                                <toclevels>3</toclevels>
                                 <icons>font</icons>
                                 <sectanchors>true</sectanchors>
                                 <idprefix/>
@@ -255,9 +259,6 @@
                         </configuration>
                     </execution>
                 </executions>
-
-
-
                 <!-- Configuration -->
                 <configuration>
                     <sourceDirectory>${asciidoctor-maven-plugin.sourceDirectory}</sourceDirectory>
@@ -298,7 +299,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
 
             <!-- Kotlin -->
             <plugin>

@@ -1,3 +1,12 @@
 [[resources-foo]]
+==== Defaults
 operation::FooTest_validate_shouldReturnDefault/[snippets='httpie-request,response-body']
 
+==== German
+operation::FooTest_validate_shouldReturnHallo/[snippets='httpie-request,response-body']
+
+==== English
+operation::FooTest_validate_shouldReturnHello/[snippets='httpie-request,response-body']
+
+==== Spain
+operation::FooTest_validate_shouldReturnHola/[snippets='httpie-request,response-body']

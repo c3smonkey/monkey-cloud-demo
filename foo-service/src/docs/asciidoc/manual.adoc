@@ -16,7 +16,7 @@ ifndef::testdir[:testdir: ../../test/java]
 
 
 [[overview]]
-= Overview
+== Overview
 
 [[overview-general]]
 == General
@@ -38,7 +38,7 @@ include::http-status-codes.adoc[]
 include::pagination.adoc[]
 
 [[resources]]
-= API Resources
-== Foo
+== API Resources
+=== Foo
 include::resources-foo.adoc[]
 
