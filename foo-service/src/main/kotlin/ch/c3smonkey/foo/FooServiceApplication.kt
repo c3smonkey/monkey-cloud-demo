@@ -5,6 +5,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient
+import org.springframework.hateoas.Resource
+import org.springframework.hateoas.config.EnableHypermediaSupport
+import org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
+import org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
@@ -15,6 +19,7 @@ import javax.servlet.http.HttpServletRequest
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableConfigurationProperties(FooProperties::class)
+@EnableHypermediaSupport(type = arrayOf(EnableHypermediaSupport.HypermediaType.HAL))
 class FooServiceApplication
 
 fun main(args: Array<String>) {
@@ -30,6 +35,16 @@ class FooProperties {
 
 @RestController
 class FooController(val fooProperties: FooProperties) {
+
+    @GetMapping(value = ["/foo"])
+    fun foo(): Resource<Map<String, String>> {
+        return Resource(fooProperties.greetings)
+                .apply {
+                    add(linkTo(methodOn(FooController::class.java).foo()).withSelfRel())
+                }.also {
+                    LOG.info("Foo is called.")
+                }
+    }
 
     @GetMapping(value = ["/"])
     fun index(request: HttpServletRequest): String {
@@ -48,6 +63,4 @@ class FooController(val fooProperties: FooProperties) {
     companion object {
         private val LOG = Logger.getLogger(FooController::class.java.name)
     }
-
-
 }
