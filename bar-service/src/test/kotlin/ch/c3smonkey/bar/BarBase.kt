@@ -14,7 +14,6 @@ import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder
 
-
 @DirtiesContext
 @AutoConfigureMessageVerifier
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets")
