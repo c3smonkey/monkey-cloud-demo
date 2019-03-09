@@ -40,6 +40,4 @@ class BarController(val barProperties: BarProperties) {
     companion object {
         private val LOG = Logger.getLogger(BarController::class.java.name)
     }
-
-
 }

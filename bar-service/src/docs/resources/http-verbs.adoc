@@ -1,0 +1,22 @@
+{project-name} tries to adhere as closely as possible to standard HTTP and REST conventions in its
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource (idempotent)
+
+| `POST`
+| Used to create a new resource
+
+| `PATCH`
+| Used to update an existing resource, including partial updates (idempotent)
+
+| `PUT`
+| Used to update an existing resource, full updates only (idempotent)
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+
+

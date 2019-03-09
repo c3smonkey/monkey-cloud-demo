@@ -1,0 +1,3 @@
+[[resources-bar]]
+==== Name
+operation::BarTest_validate_shouldReturnName/[snippets='httpie-request,response-body']

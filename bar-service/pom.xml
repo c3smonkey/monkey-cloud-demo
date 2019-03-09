@@ -20,6 +20,15 @@
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <spring-cloud-contract.version>2.1.1.RELEASE</spring-cloud-contract.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+
+        <!-- =================  Asciidoc ================= -->
+        <asciidoctor-maven-plugin.version>1.5.6</asciidoctor-maven-plugin.version>
+        <asciidoctorj-diagram.version>1.5.9</asciidoctorj-diagram.version>
+        <asciidoctorj.version>1.5.6</asciidoctorj.version>
+        <snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
+        <asciidoctor-maven-plugin.sourceDirectory>src/docs/asciidoc</asciidoctor-maven-plugin.sourceDirectory>
+        <asciidoctor-maven-plugin.baseDir>src/docs/resources</asciidoctor-maven-plugin.baseDir>
+        <asciidoctor-maven-plugin.outputDirectory>target/classes/static/api-docs</asciidoctor-maven-plugin.outputDirectory>
     </properties>
 
     <dependencies>
@@ -100,6 +109,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-contract-verifier</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Restdocs -->
+        <dependency>
+            <groupId>org.springframework.restdocs</groupId>
+            <artifactId>spring-restdocs-mockmvc</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -200,6 +215,86 @@
                     <packageWithBaseClasses>ch.c3smonkey.bar</packageWithBaseClasses>
                 </configuration>
             </plugin>
+
+            <!-- Asciidoc -->
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>${asciidoctor-maven-plugin.version}</version>
+                <!-- Execution -->
+                <executions>
+                    <execution>
+                        <id>generate-docs</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <!-- directories -->
+                            <baseDir>${asciidoctor-maven-plugin.baseDir}</baseDir>
+                            <sourceDirectory>${asciidoctor-maven-plugin.sourceDirectory}</sourceDirectory>
+                            <outputDirectory>${asciidoctor-maven-plugin.outputDirectory}</outputDirectory>
+                            <!-- backend -->
+                            <backend>html5</backend>
+                            <doctype>book</doctype>
+                            <sourceHighlighter>coderay</sourceHighlighter>
+                            <requires>
+                                <require>asciidoctor-diagram</require>
+                            </requires>
+                            <!-- attributes -->
+                            <attributes>
+                                <imagesdir>./images</imagesdir>
+                                <toc>left</toc>
+                                <toclevels>3</toclevels>
+                                <icons>font</icons>
+                                <sectanchors>true</sectanchors>
+                                <idprefix/>
+                                <idseparator>-</idseparator>
+                                <docinfo1>true</docinfo1>
+                                <project-version>${project.version}</project-version>
+                                <project-name>${project.name}</project-name>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                </executions>
+                <!-- Configuration -->
+                <configuration>
+                    <sourceDirectory>${asciidoctor-maven-plugin.sourceDirectory}</sourceDirectory>
+                    <attributes>
+                        <sourcedir>${project.build.sourceDirectory}</sourcedir>
+                        <sourcedirKotlin>${project.basedir}/src/main/kotlin</sourcedirKotlin>
+                        <project-version>${project.version}</project-version>
+                        <project-name>${project.name}</project-name>
+                        <project-artifact-name>${project.name}-${project.version}</project-artifact-name>
+                        <snippets>${snippetsDirectory}</snippets>
+                    </attributes>
+                </configuration>
+                <!-- Dependencies -->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework.restdocs</groupId>
+                        <artifactId>spring-restdocs-asciidoctor</artifactId>
+                        <version>${spring-restdocs.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj</artifactId>
+                        <version>${asciidoctorj.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-diagram</artifactId>
+                        <version>${asciidoctorj-diagram.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.springframework.restdocs</groupId>
+                        <artifactId>spring-restdocs-asciidoctor</artifactId>
+                        <version>${spring-restdocs.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+
 
             <!-- Kotlin -->
             <plugin>
