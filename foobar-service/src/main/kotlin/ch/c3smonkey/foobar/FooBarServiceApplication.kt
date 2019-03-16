@@ -79,8 +79,8 @@ class FooService(private val restTemplate: RestTemplate) {
  * Feign
  */
 @Service
-class BarService(private val inoaFeignClient: BarFeignClient) {
-    fun getName() = inoaFeignClient.getName()
+class BarService(private val barFeignClient: BarFeignClient) {
+    fun getName() = barFeignClient.getName()
 }
 
 @FeignClient("bar-service")
