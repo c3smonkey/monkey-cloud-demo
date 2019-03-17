@@ -4,8 +4,10 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc
 import org.junit.Before
 import org.junit.Rule
 import org.junit.rules.TestName
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.cloud.contract.verifier.messaging.boot.AutoConfigureMessageVerifier
 import org.springframework.restdocs.JUnitRestDocumentation
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
@@ -41,11 +43,13 @@ open class FooBase {
 
         fooProperties.greetings = greetings
 
+        val fooService = FooService(fooProperties = fooProperties)
 
-        RestAssuredMockMvc.standaloneSetup(FooController(fooProperties))
+
+        RestAssuredMockMvc.standaloneSetup(FooController(fooService))
 
         RestAssuredMockMvc.standaloneSetup(MockMvcBuilders
-                .standaloneSetup(FooController(fooProperties))
+                .standaloneSetup(FooController(fooService))
                 .apply<StandaloneMockMvcBuilder>(documentationConfiguration(this.restDocumentation))
                 .alwaysDo(document(
                         javaClass.simpleName + "_" + testName.getMethodName())))

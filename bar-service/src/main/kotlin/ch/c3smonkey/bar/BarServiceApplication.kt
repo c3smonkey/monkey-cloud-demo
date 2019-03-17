@@ -26,7 +26,6 @@ class BarProperties {
 
 }
 
-
 @RestController
 class BarController(val barProperties: BarProperties) {
 
