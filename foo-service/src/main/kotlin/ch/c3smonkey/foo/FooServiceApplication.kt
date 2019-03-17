@@ -25,6 +25,8 @@ import javax.servlet.http.HttpServletRequest
 class FooServiceApplication
 
 fun main(args: Array<String>) {
+    // -noverify
+    System.setProperty("spring.main.lazy-initialization", "true")
     runApplication<FooServiceApplication>(*args)
 }
 
@@ -62,10 +64,18 @@ class FooController(private val fooService: FooService) {
 }
 
 @Service
-class FooService(val fooProperties: FooProperties){
-    fun getGreetings() = fooProperties.greetings
-    fun getGreetings(languageCode: String) = fooProperties.greetings.get(languageCode.toUpperCase())
-    fun getGreetingsOrDefault(languageCode: String) = fooProperties.greetings.getOrDefault(languageCode.toUpperCase(), fooProperties.greeting)
+class FooService(val fooProperties: FooProperties) {
+    fun getGreetings(): Map<String, String> =
+            fooProperties.greetings
+
+    fun getGreetings(languageCode: String): String? {
+        Thread.sleep(5_000)
+        return fooProperties.greetings.get(languageCode.toUpperCase())
+    }
+
+    fun getGreetingsOrDefault(languageCode: String) =
+            fooProperties.greetings.getOrDefault(languageCode.toUpperCase(), fooProperties.greeting)
+
 
 }
 

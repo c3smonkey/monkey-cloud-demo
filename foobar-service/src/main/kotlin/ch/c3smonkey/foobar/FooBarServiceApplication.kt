@@ -45,10 +45,16 @@ class FooBarController(private val fooService: FooService, private val barServic
 
     @GetMapping(value = ["/"])
     fun index(request: HttpServletRequest): String {
+        val start = System.nanoTime()
+
         val locale = RequestContextUtils.getLocaleResolver(request)!!.resolveLocale(request).toLanguageTag()
         val foobar = StringBuilder().append(fooService.getGreeting(locale)).append(" ").append(barService.getName()).toString()
         LOG.info("Greeting: $foobar")
         LOG.info("Locale: $locale")
+
+        val end = System.nanoTime()
+        println("${(end - start) / 1.0e9} seconds")
+
         return foobar
     }
 
@@ -89,4 +95,14 @@ interface BarFeignClient {
     @GetMapping(value = ["/"])
     fun getName(): String
 
+}
+
+
+
+
+fun measureTime(block: () -> Unit) {
+    val start = System.nanoTime()
+    block()
+    val end = System.nanoTime()
+    println("${(end - start) / 1.0e9} seconds")
 }
