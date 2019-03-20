@@ -69,7 +69,7 @@ class FooService(val fooProperties: FooProperties) {
             fooProperties.greetings
 
     fun getGreetings(languageCode: String): String? {
-        Thread.sleep(2_000)
+        Thread.sleep(5_000)
         return fooProperties.greetings.get(languageCode.toUpperCase())
     }
 
