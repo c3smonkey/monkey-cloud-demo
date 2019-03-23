@@ -17,7 +17,7 @@
 
     <modules>
         <module>foo-service</module>
-        <module>bar-service</module>
+        <module>customer-service</module>
         <module>foobar-service</module>
     </modules>
 </project>

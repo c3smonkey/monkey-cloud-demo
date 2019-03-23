@@ -8,9 +8,9 @@ matrix:
         - cd foo-service
         - ./mvnw clean install -B
         - cd ..
-    - name: "build bar-service"
+    - name: "build customer-service"
       script:
-        - cd bar-service
+        - cd customer-service
         - ./mvnw clean install -B
         - cd ..
     - name: "build foobar-service"

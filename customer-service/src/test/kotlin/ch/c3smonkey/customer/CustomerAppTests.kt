@@ -1,4 +1,4 @@
-package ch.c3smonkey.bar
+package ch.c3smonkey.customer
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = ["spring.cloud.config.enabled:false", "eureka.client.enabled:false"])
 @TestPropertySource(locations = ["classpath:test.properties"])
-class BarServiceApplicationTests {
+class CustomerAppTests {
 
     @Autowired
     lateinit var testRestTemplate: TestRestTemplate

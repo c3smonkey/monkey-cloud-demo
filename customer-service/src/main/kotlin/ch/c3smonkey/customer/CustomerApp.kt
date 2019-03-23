@@ -1,4 +1,4 @@
-package ch.c3smonkey.bar
+package ch.c3smonkey.customer
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationProperties
@@ -12,27 +12,27 @@ import javax.servlet.http.HttpServletRequest
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableConfigurationProperties(BarProperties::class)
-class BarServiceApplication
+@EnableConfigurationProperties(CustomerProperties::class)
+class CustomerApp
 
 fun main(args: Array<String>) {
-    runApplication<BarServiceApplication>(*args)
+    runApplication<CustomerApp>(*args)
 }
 
 @ConfigurationProperties
-class BarProperties {
+class CustomerProperties {
     lateinit var name: String
     lateinit var names : Map<String, String>
 
 }
 
 @RestController
-class BarController(val barProperties: BarProperties) {
+class BarController(val customerProperties: CustomerProperties) {
 
     @GetMapping(value = ["/"])
     fun index(request: HttpServletRequest): String {
-        val name = barProperties.name
-        LOG.info("Service [bar-service] say : $name")
+        val name = customerProperties.name
+        LOG.info("Service [customer-service] say : $name")
         return name
     }
 

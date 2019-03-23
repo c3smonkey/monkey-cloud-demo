@@ -137,7 +137,7 @@
 
         <dependency>
             <groupId>ch.c3smonkey</groupId>
-            <artifactId>bar-service</artifactId>
+            <artifactId>customer-service</artifactId>
              <version>0.0.1-SNAPSHOT</version>
             <classifier>stubs</classifier>
             <scope>test</scope>

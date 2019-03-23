@@ -45,7 +45,7 @@ jobs:
       - build-maven-module:
           to: "foo-service"
       - build-maven-module:
-          to: "bar-service"
+          to: "customer-service"
       - build-maven-module:
           to: "foobar-service"
 

@@ -40,5 +40,5 @@ include::pagination.adoc[]
 [[resources]]
 == API Resources
 === Bar
-include::resources-bar.adoc[]
+include::resources.adoc[]
 

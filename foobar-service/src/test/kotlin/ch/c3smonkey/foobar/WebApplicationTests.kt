@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = ["spring.cloud.config.enabled:false", "eureka.client.enabled:false"])
-@AutoConfigureStubRunner(ids = ["ch.c3smonkey:bar-service:+:stubs:0", "ch.c3smonkey:foo-service:+:stubs:0"])
+@AutoConfigureStubRunner(ids = ["ch.c3smonkey:customer-service:+:stubs:0", "ch.c3smonkey:foo-service:+:stubs:0"])
 @DirtiesContext
 class WebApplicationTests {
 

@@ -1,4 +1,4 @@
-spring.application.name: bar-service
+spring.application.name: customer-service
 
 name: John
 names:

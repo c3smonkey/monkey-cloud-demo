@@ -1,4 +1,4 @@
-package ch.c3smonkey.bar
+package ch.c3smonkey.customer
 
 import io.restassured.module.mockmvc.RestAssuredMockMvc
 import org.junit.Before
@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = ["spring.cloud.config.enabled:false", "eureka.client.enabled:false"])
-open class BarBase {
+open abstract class CustomerBase {
 
     @get:Rule
     var restDocumentation = JUnitRestDocumentation()
@@ -31,7 +31,7 @@ open class BarBase {
     @Before
     fun setup() {
 
-        val barProperties = BarProperties()
+        val barProperties = CustomerProperties()
         barProperties.name = "John"
 
 

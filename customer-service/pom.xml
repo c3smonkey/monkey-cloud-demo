@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ch.c3smonkey</groupId>
-    <artifactId>bar-service</artifactId>
+    <artifactId>customer-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>bar-service</name>
-    <description>Monkey Clout Demo Application - Bar-Service</description>
+    <name>customer-service</name>
+    <description>Monkey Clout Demo Application - Customer-Service</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -182,13 +182,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build-info</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <!-- Git information -->
@@ -217,7 +210,7 @@
                 <version>${spring-cloud-contract.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <packageWithBaseClasses>ch.c3smonkey.bar</packageWithBaseClasses>
+                    <packageWithBaseClasses>ch.c3smonkey.customer</packageWithBaseClasses>
                 </configuration>
             </plugin>
 
