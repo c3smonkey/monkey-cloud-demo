@@ -25,8 +25,7 @@ import javax.servlet.http.HttpServletRequest
 class FooServiceApplication
 
 fun main(args: Array<String>) {
-    // -noverify
-    System.setProperty("spring.main.lazy-initialization", "true")
+    System.setProperty("spring.main.lazy-initialization", "true") // -noverify
     runApplication<FooServiceApplication>(*args)
 }
 

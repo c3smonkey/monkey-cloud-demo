@@ -32,6 +32,8 @@ class CustomerController(val customerService: CustomerService) {
         return name
     }
 
+
+
     @GetMapping(value = ["/name"])
     fun getName() = customerService.getName()
 
@@ -50,11 +52,16 @@ class CustomerService(val customerProperties: CustomerProperties){
 }
 
 
-
-
 @ConfigurationProperties
 class CustomerProperties {
     lateinit var name: String
     lateinit var names : Map<String, String>
 
 }
+
+//   _   _    _  _____ _____ ___    _    ____
+//  | | | |  / \|_   _| ____/ _ \  / \  / ___|
+//  | |_| | / _ \ | | |  _|| | | |/ _ \ \___ \
+//  |  _  |/ ___ \| | | |___ |_| / ___ \ ___) |
+//  |_| |_/_/   \_\_| |_____\___/_/   \_\____/
+//

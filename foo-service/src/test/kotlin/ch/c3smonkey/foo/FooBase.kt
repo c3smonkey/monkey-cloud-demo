@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = ["spring.cloud.config.enabled:false", "eureka.client.enabled:false"])
-open class FooBase {
+open abstract class FooBase {
 
     @get:Rule
     var restDocumentation = JUnitRestDocumentation()
