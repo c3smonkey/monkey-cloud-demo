@@ -39,6 +39,6 @@ include::pagination.adoc[]
 
 [[resources]]
 == API Resources
-=== Bar
+=== Customer
 include::resources.adoc[]
 
