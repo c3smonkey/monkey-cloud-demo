@@ -1,6 +1,6 @@
 package ch.c3smonkey.customer
 
-import io.restassured.module.mockmvc.RestAssuredMockMvc
+import io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup
 import org.junit.Before
 import org.junit.Rule
 import org.junit.rules.TestName
@@ -10,6 +10,7 @@ import org.springframework.cloud.contract.verifier.messaging.boot.AutoConfigureM
 import org.springframework.restdocs.JUnitRestDocumentation
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration
+import org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint
 import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder
@@ -30,22 +31,26 @@ open abstract class CustomerBase {
 
     @Before
     fun setup() {
-
-        val barProperties = CustomerProperties()
-        barProperties.name = "John"
-
-
-        RestAssuredMockMvc.standaloneSetup(BarController(barProperties))
+        val customerProperties = CustomerProperties()
+        customerProperties.name = "John"
+        customerProperties.names = mapOf("0" to "Baxter", "1" to "Dave")
+        val customerService = CustomerService(customerProperties = customerProperties)
 
 
-        RestAssuredMockMvc.standaloneSetup(MockMvcBuilders
-                .standaloneSetup(BarController(barProperties))
-                .apply<StandaloneMockMvcBuilder>(documentationConfiguration(this.restDocumentation))
-                .alwaysDo(document(
-                        javaClass.simpleName + "_" + testName.getMethodName())))
+        standaloneSetup(MockMvcBuilders
+                .standaloneSetup(CustomerController(customerService = customerService))
+                .apply<StandaloneMockMvcBuilder>(
+                        documentationConfiguration(this.restDocumentation)
+                                .operationPreprocessors()
+                                .withRequestDefaults(prettyPrint())
+                                .withResponseDefaults(prettyPrint())
+                )
+                .alwaysDo(
+                        document(
+                                javaClass.simpleName + "_" + testName.getMethodName())
+                )
+        )
     }
-
-
 }
 
 

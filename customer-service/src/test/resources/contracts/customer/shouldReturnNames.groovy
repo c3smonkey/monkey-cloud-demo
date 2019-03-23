@@ -5,15 +5,18 @@ import org.springframework.cloud.contract.spec.Contract
 Contract.make {
     request {
         method 'GET'
-        url '/name'
+        url '/names'
         headers {
         }
     }
     response {
         status 200
-        body("John")
+        body(
+                0: "Baxter",
+                1: "Dave"
+        )
         headers {
-            contentType(textPlain())
+            contentType(applicationJsonUtf8())
         }
     }
 }

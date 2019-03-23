@@ -1,3 +1,5 @@
 [[resources-bar]]
 ==== Name
 operation::CustomerTest_validate_shouldReturnName/[snippets='httpie-request,response-body']
+==== Names
+operation::CustomerTest_validate_shouldReturnNames/[snippets='httpie-request,response-body']
