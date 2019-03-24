@@ -92,7 +92,7 @@ class CustomerService(private val customerFeignClient: CustomerFeignClient) {
 @FeignClient("customer-service")
 interface CustomerFeignClient {
 
-    @GetMapping(value = ["/"])
+    @GetMapping(value = ["/name"])
     fun getName(): String
 
 }
