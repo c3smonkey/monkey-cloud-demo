@@ -19,12 +19,12 @@ import org.springframework.test.context.junit4.SpringRunner
 class BarServiceTest {
 
     @Autowired
-    internal var barService: BarService? = null
+    internal var customerService: CustomerService? = null
 
     @Test
     @Throws(Exception::class)
     fun getNameTest() {
-        val name = barService!!.getName()
+        val name = customerService!!.getName()
         assertEquals("John", name)
     }
 }

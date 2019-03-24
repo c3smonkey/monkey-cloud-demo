@@ -41,14 +41,14 @@ class WebConfiguration {
 
 
 @RestController
-class FooBarController(private val fooService: FooService, private val barService: BarService) {
+class FooBarController(private val fooService: FooService, private val customerService: CustomerService) {
 
     @GetMapping(value = ["/"])
     fun index(request: HttpServletRequest): String {
         val start = System.nanoTime()
 
         val locale = RequestContextUtils.getLocaleResolver(request)!!.resolveLocale(request).toLanguageTag()
-        val foobar = StringBuilder().append(fooService.getGreeting(locale)).append(" ").append(barService.getName()).toString()
+        val foobar = StringBuilder().append(fooService.getGreeting(locale)).append(" ").append(customerService.getName()).toString()
         LOG.info("Greeting: $foobar")
         LOG.info("Locale: $locale")
 
@@ -85,12 +85,12 @@ class FooService(private val restTemplate: RestTemplate) {
  * Feign
  */
 @Service
-class BarService(private val barFeignClient: BarFeignClient) {
-    fun getName() = barFeignClient.getName()
+class CustomerService(private val customerFeignClient: CustomerFeignClient) {
+    fun getName() = customerFeignClient.getName()
 }
 
-@FeignClient("bar-service")
-interface BarFeignClient {
+@FeignClient("customer-service")
+interface CustomerFeignClient {
 
     @GetMapping(value = ["/"])
     fun getName(): String
@@ -98,9 +98,7 @@ interface BarFeignClient {
 }
 
 
-
-
-fun measureTime(block: () -> Unit) {
+internal fun measureTime(block: () -> Unit) {
     val start = System.nanoTime()
     block()
     val end = System.nanoTime()
