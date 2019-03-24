@@ -23,7 +23,7 @@ class BarServiceTest {
 
     @Test
     @Throws(Exception::class)
-    fun getInoaTest() {
+    fun getNameTest() {
         val name = barService!!.getName()
         assertEquals("John", name)
     }
