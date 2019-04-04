@@ -15,7 +15,11 @@ import java.util.logging.Logger
 import javax.servlet.http.HttpServletRequest
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.hateoas.config.EnableHypermediaSupport
-
+import java.util.*
+import org.springframework.hateoas.IanaLinkRelations
+import org.springframework.hateoas.MediaTypes
+import org.springframework.hateoas.RepresentationModel
+import org.springframework.hateoas.server.mvc.add
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -70,7 +74,7 @@ class CustomerProperties {
 //  |  _  |/ ___ \| | | |___ |_| / ___ \ ___) |
 //  |_| |_/_/   \_\_| |_____\___/_/   \_\____/
 //
-class CustomerModel(
+open class CustomerModel(
         val firstname: String,
         val lastname: String
 ) : RepresentationModel<CustomerModel>()
@@ -125,3 +129,29 @@ class CustomerHalController() {
     }
 
 }
+
+
+
+@RestController
+@RequestMapping("/api", produces = [MediaTypes.HAL_JSON_UTF8_VALUE])
+class IndexController {
+
+    @GetMapping
+    fun api(): Index = Index()
+            .apply {
+//                add(CustomerHalController::class) {
+//                    linkTo { hal() } withRel "faktura"
+//                    linkTo { getByPartnerId(Optional.empty()) } withRel "fakturen-by-partnerId"
+//                }
+                add(IndexController::class) {
+                    linkTo { api() } withRel IanaLinkRelations.SELF
+                    linkTo { api() }.slash("api-docs/manual.html") withRel "documentation"
+                }
+                add(CustomerHalController::class){
+                    linkTo {hal()} withRel "hal"
+                }
+
+            }
+}
+
+open class Index : RepresentationModel<Index>()
