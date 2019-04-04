@@ -139,10 +139,6 @@ class IndexController {
     @GetMapping
     fun api(): Index = Index()
             .apply {
-//                add(CustomerHalController::class) {
-//                    linkTo { hal() } withRel "faktura"
-//                    linkTo { getByPartnerId(Optional.empty()) } withRel "fakturen-by-partnerId"
-//                }
                 add(IndexController::class) {
                     linkTo { api() } withRel IanaLinkRelations.SELF
                     linkTo { api() }.slash("api-docs/manual.html") withRel "documentation"
