@@ -16,7 +16,7 @@ defaults: &defaults
     # Customize the JVM maximum heap limit
     MAVEN_OPTS: -Xmx3200m
 
-# Build Command for Maven en modules
+# Build Command for Maven modules
 commands:
   build-maven-module:
     description: "Build and Deploy Maven Project"
@@ -30,6 +30,14 @@ commands:
           command: |
             cd << parameters.to >>
             mvn -s ../.circleci/settings.xml -DforkCount=0 deploy
+      - run:
+          name: Sonar
+          command: |
+            mvn sonar:sonar \
+              -Dsonar.projectKey=c3smonkey_monkey-cloud-demo \
+              -Dsonar.organization=$SONAR_PROJECT \
+              -Dsonar.host.url=https://sonarcloud.io \
+              -Dsonar.login=$SONAR_TOKEN
 
 # Jobs
 version: 2.1

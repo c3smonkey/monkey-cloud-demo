@@ -33,7 +33,19 @@
         <snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
         <asciidoctor-maven-plugin.sourceDirectory>src/docs/asciidoc</asciidoctor-maven-plugin.sourceDirectory>
         <asciidoctor-maven-plugin.baseDir>src/docs/resources</asciidoctor-maven-plugin.baseDir>
-        <asciidoctor-maven-plugin.outputDirectory>target/classes/static/api-docs</asciidoctor-maven-plugin.outputDirectory>
+        <asciidoctor-maven-plugin.outputDirectory>target/classes/static/api-docs
+        </asciidoctor-maven-plugin.outputDirectory>
+
+        <!-- =================  Test ================= -->
+        <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+        <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
+        <sonar.sources>
+            ${project.basedir}/src/main/kotlin,${project.basedir}/src/test/kotlin,${project.basedir}/src/main/java,${project.basedir}/src/test/java
+        </sonar.sources>
+        <sonar.test.exclusions>
+            ${project.basedir}/src/test/java/**/*.java,${project.basedir}/src/test/kotlin/**/*.kt
+        </sonar.test.exclusions>
+        <sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>
     </properties>
 
     <!-- Developers   -->
@@ -214,7 +226,6 @@
     </dependencyManagement>
 
 
-
     <build>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
@@ -241,7 +252,53 @@
                     <argLine>-Xms1024m -Xmx2048m</argLine>
                     <reuseForks>true</reuseForks>
                     <useSystemClassLoader>false</useSystemClassLoader>
+                    <includes>
+                        <include>ch.c3smonkey.cloud.IntegrationTestSuite.class</include>
+                    </includes>
                 </configuration>
+            </plugin>
+            <!-- Integration Tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>ch.c3smonkey.cloud.IntegrationTestSuite.class</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Jacoco -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Sonar -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar-maven-plugin.version}</version>
             </plugin>
 
             <!-- Contracts -->
@@ -332,7 +389,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
 
 
             <!-- Kotlin -->
