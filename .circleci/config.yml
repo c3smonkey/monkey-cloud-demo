@@ -30,14 +30,6 @@ commands:
           command: |
             cd << parameters.to >>
             mvn -s ../.circleci/settings.xml -DforkCount=0 deploy
-      - run:
-          name: Sonar
-          command: |
-            mvn sonar:sonar \
-              -Dsonar.projectKey=c3smonkey_monkey-cloud-demo \
-              -Dsonar.organization=$SONAR_PROJECT \
-              -Dsonar.host.url=https://sonarcloud.io \
-              -Dsonar.login=$SONAR_TOKEN
 
 # Jobs
 version: 2.1
