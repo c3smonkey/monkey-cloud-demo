@@ -39,11 +39,8 @@
         <!-- =================  Test ================= -->
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
-        <sonar.sources>
-            ${project.basedir}/src/main/kotlin,${project.basedir}/src/test/kotlin,${project.basedir}/src/main/java,${project.basedir}/src/test/java
-        </sonar.sources>
         <sonar.test.exclusions>
-            ${project.basedir}/src/test/java/**/*.java,${project.basedir}/src/test/kotlin/**/*.kt
+            ${project.basedir}/src/test/kotlin/**/*.kt
         </sonar.test.exclusions>
         <sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>
     </properties>
